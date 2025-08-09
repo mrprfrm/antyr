@@ -6,15 +6,28 @@ venv = ".venv"
 dev-dependencies = [
     "ipdb>=0.13.13",
     "pytest>=8.3.5",
-    "pytest-asyncio>=0.24.0",
+    "pytest-trio>=0.8.0",
+    "pytest-cov>=7.0.0",
+    "pip-audit>=2.10.0",
+    "bandit>=1.9.3",
+    "hypothesis>=6.151.2",
 ]
 
+[tool.bandit]
+exclude_dirs = ["tests", "docs"]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.isort]
+profile = "black"
+
 [project]
-name = "myrmex"
+name = "antyr"
 version = "0.1.5"
 description = "The compact web crawling toolkit"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 licence="MIT"
 authors = [
     { name = "Anton Petrov", email = "mrprfrm@gmail.com" },
@@ -27,14 +40,13 @@ classifiers = [
 ]
 license-files = ["LICEN[CS]E*"]
 dependencies = [
-    "aiohttp>=3.10.11",
-    "aiohttp-socks>=0.10.1",
-    "result>=0.17.0",
+    "trio>=0.32.0",
+    "httpx[socks]>=0.28.1",
     "stem>=1.8.2",
 ]
 
 [project.urls]
-Homepage = "https://github.com/mrprfrm/myrmex"
+Homepage = "https://github.com/mrprfrm/antyr"
 
 [build-system]
 requires = ["hatchling >= 1.26"]
@@ -44,7 +56,7 @@ build-backend = "hatchling.build"
 only-include = [
     "README.md",
     "LICENSE",
-    "myrmex",
+    "antyr",
     "tests",
 ]
 

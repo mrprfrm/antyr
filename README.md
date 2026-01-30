@@ -1,100 +1,86 @@
-<img src="https://github.com/user-attachments/assets/fdcf9749-a847-474c-a03d-e6c92f630635" alt="Alt Text" max-height="250">
+<div align="center">
+    <img width="300" height="300" alt="antyr-logo" src="https://github.com/user-attachments/assets/91a3347d-4863-43d7-a2a2-d581e5ede72c" />
+</div>
 
-# myrmex
+# antyr
 
-The compact web crawling toolkit.
+This project focuses on **core crawling primitives**: making HTTP requests, consuming responses as streams, and persisting streamed content with explicit, cancellation-safe lifetimes.
 
-Unlike full-featured frameworks, `myrmex` does not implement an entire scraping pipeline. Instead, it focuses exclusively on core crawling functionality. Higher-level scraping logic is left to the specific implementation of your scraper.
+Unlike full-featured frameworks, `antyr` does not implement an end-to-end scraping pipeline. Parsing, extraction logic, data modeling, retries, scheduling, and storage are left to the caller.
 
-> If you're looking for a complete scraping framework, consider [Scrapy](https://github.com/scrapy/scrapy).
-
-`myrmex` provides a minimal interface through two crawler classes — `Crawler` and `TorCrawler` — for regular HTTP crawling and Tor-based anonymous crawling, respectively.
-
-### Key Capabilities
-
-- Asynchronous context management for automatic resource handling
-- Built on `aiohttp` for HTTP requests
-- Executes synchronous operations using the native asyncio thread pool (non-blocking)
-- Functional-style error handling via [Result](https://github.com/rustedpy/result)
-- Configurable per-operation timeouts for robust request management
+> If you want a batteries-included scraping framework, consider Scrapy.
 
 ## Installation
 
 Install via pip:
 
 ```bash
-pip install myrmex
+pip install antyr
 ```
 
 Or using [uv](https://github.com/astral-sh/uv):
 
 ```bash
-uv add myrmex
+uv add antyr
 ```
 
-Please note that the following libraries will be installed alongside `myrmex`:
+Please note that the following packages will be installed alongside `antyr`:
 
-- `aiohttp` – for HTTP requests
-- `aiohttp-socks` – for SOCKS5 proxy support
-- `stem` – for Tor control port integration
-- `result` – for functional-style error handling
+- `trio` – structured concurrency runtime
+- `httpx[socks]` – HTTP client with SOCKS proxy support
+- `stem` – Tor control port integration
 
-## Configuration
+## Quickstart
 
-`Crawler` accepts the following options:
+The examples below show how to fetch a resource and either process its contents as a stream or persist it to disk.
 
-| Parameter | Type   | Default | Description                                |
-| --------- | ------ | ------- | ------------------------------------------ |
-| `timeout` | `int`  | `10`    | Timeout (in seconds) for HTTP requests.    |
-| `headers` | `dict` | `None`  | HTTP headers to include with each request. |
+### Fetch and process a response as a stream
 
-…and `TorCrawler` accepts the following options during initialization:
-
-| Parameter  | Type   | Default | Description                                                  |
-| ---------- | ------ | ------- | ------------------------------------------------------------ |
-| `address`  | `str`  | `None`  | SOCKS5 proxy address for routing traffic through Tor.        |
-| `password` | `str`  | `None`  | Control port password for authenticating with the Tor proxy. |
-| `timeout`  | `int`  | `10`    | Timeout (in seconds) for HTTP requests.                      |
-| `headers`  | `dict` | `None`  | HTTP headers to include with each request.                   |
-
-## Usage Example
-
-The example below demonstrates how to fetch your current IP address over the Tor network:
+Instead of buffering the entire response in memory, the response can be processed incrementally as it is received.
 
 ```python
-import asyncio
-from myrmex import TorCrawler
+import trio
+from antyr import HttpCrawler
 
-async def main():
-    async with TorCrawler("socks5h://127.0.0.1:9050", password="password") as crawler:
-        await crawler.rotate_ip()  # optional: rotates IP before request
-        result = await crawler.fetch("http://httpbin.org/ip")
-        if result.is_ok():
-            print("Current IP:", result.unwrap())
+async def main() -> None:
+    async with HttpCrawler("https://httpbin.org") as crawler:
+        stream = await crawler.fetch("/json").content_stream()
 
-asyncio.run(main())
+        async for chunk in stream:
+            # process chunk
+
+trio.run(main)
 ```
 
-## Tor Setup
+If the response body is an archive, it can be extracted before processing by calling `extract()`. The extracted content is exposed through the same streaming interface.
 
-Since `TorCrawler` is strictly associated with Tor network usage, ensure that you have a configured and running Tor instance before using it.
+```python
+import trio
+from antyr import HttpCrawler
 
-Update your `torrc` configuration file with the following:
+async def main() -> None:
+    async with HttpCrawler("https://example.com") as crawler:
+        stream = await crawler.fetch("/archive.zip").extract()
 
-```torrc
-SocksPort 0.0.0.0:9050
-ControlPort 0.0.0.0:9051
-HashedControlPassword ***
+        async for chunk in stream:
+            # process chunk
+
+trio.run(main)
 ```
 
-To generate a hashed password:
+### Stream to disk
 
-```bash
-tor --hash-password your_password
+Stream the response body directly to disk.
+
+```python
+import trio
+from antyr import HttpCrawler
+
+async def main() -> None:
+    async with HttpCrawler("https://httpbin.org") as crawler:
+        await crawler.fetch("/image/png").save("downloads")
+
+trio.run(main)
 ```
 
-Start Tor manually in the background:
-
-```bash
-tor &
-```
+The target filename is derived from the response headers or URL and normalized for filesystem safety.

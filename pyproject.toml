@@ -24,7 +24,7 @@ profile = "black"
 
 [project]
 name = "antyr"
-version = "0.1.5"
+version = "1.0.1"
 description = "The compact web crawling toolkit"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -61,4 +61,4 @@ only-include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-only-include = ["myrmex", "LICENSE", "README.md"]
+only-include = ["antyr", "LICENSE", "README.md"]

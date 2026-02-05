@@ -24,8 +24,8 @@ profile = "black"
 
 [project]
 name = "antyr"
-version = "1.0.1"
-description = "The compact web crawling toolkit"
+version = "1.0.2"
+description = "A compact web crawling toolkit"
 readme = "README.md"
 requires-python = ">=3.11"
 licence="MIT"

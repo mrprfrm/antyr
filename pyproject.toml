@@ -24,15 +24,17 @@ profile = "black"
 
 [project]
 name = "antyr"
-version = "1.0.2"
+version = "1.0.3"
 description = "A compact web crawling toolkit"
 readme = "README.md"
 requires-python = ">=3.11"
-licence="MIT"
+license="MIT"
 authors = [
     { name = "Anton Petrov", email = "mrprfrm@gmail.com" },
 ]
 classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: MIT License",
     "Topic :: Internet :: WWW/HTTP",
     "Programming Language :: Python :: 3",
     "Intended Audience :: Developers",
@@ -47,6 +49,8 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/mrprfrm/antyr"
+Source = "https://github.com/mrprfrm/antyr"
+"Bug Tracker" = "https://github.com/mrprfrm/antyr/issues"
 
 [build-system]
 requires = ["hatchling >= 1.26"]

@@ -27,7 +27,7 @@ class ExtractResult(LazyExecutionChain[..., ContentStream]):
         super().__init__(fn)
 
     def save(
-        self, base_path: str | Path = Path.cwd()
+        self, base_path: str | Path | None = None
     ) -> LazyExecutionNode[[ContentStream], None]:
         """
         Persists extracted content to the filesystem.
@@ -36,11 +36,15 @@ class ExtractResult(LazyExecutionChain[..., ContentStream]):
         yielded chunks under the provided base path.
 
         Args:
-            base_path: Target directory for extracted files.
+            base_path: Target directory for extracted files. Defaults to
+                the current working directory.
 
         Returns:
             Execution node performing the save operation.
         """
+
+        if base_path is None:
+            base_path = Path.cwd()
 
         async def save_function(stream: ContentStream) -> None:
             async with Writer(base_path) as writer:
@@ -265,7 +269,7 @@ class FetchResult(LazyExecutionChain[..., httpx.Response]):
 
     def save(
         self,
-        base_path: str | Path = Path.cwd(),
+        base_path: str | Path | None = None,
         *,
         max_content_length: int | None = None,
         chunk_size: int | None = None,
@@ -277,13 +281,17 @@ class FetchResult(LazyExecutionChain[..., httpx.Response]):
         The response is closed once streaming completes or aborts.
 
         Args:
-            base_path: Target directory for saved files.
+            base_path: Target directory for saved files. Defaults to
+                the current working directory.
             max_content_length: Optional upper bound for total content size.
             chunk_size: Optional chunk size for streaming.
 
         Returns:
             Execution node performing the save operation.
         """
+
+        if base_path is None:
+            base_path = Path.cwd()
 
         nxt = self.then(
             self.__process_content_stream,

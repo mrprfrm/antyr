@@ -1,0 +1,66 @@
+site_name: antyr
+site_description: A minimalistic web crawling toolkit for Python
+site_url: https://mrprfrm.github.io/antyr
+repo_url: https://github.com/mrprfrm/antyr
+repo_name: GitHub
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - content.code.copy
+    - navigation.sections
+    - navigation.expand
+  font:
+    text: Inter
+    code: JetBrains Mono
+  logo: assets/antyr-logo-tiny.png
+  favicon: assets/antyr-logo-tiny.png
+
+extra_css:
+  - stylesheets/custom.css
+
+nav:
+  - Overview: index.md
+  - API Reference:
+      - HttpCrawler: api/crawlers.md
+      - Results: api/results.md
+      - Execution: api/execution.md
+      - Streaming: api/streaming.md
+      - Writer: api/files.md
+      - ZIP Extraction: api/zip.md
+      - Utilities: api/func.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_root_heading: true
+            show_root_full_path: false
+            heading_level: 2
+            members_order: source
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            docstring_style: google
+            merge_init_into_class: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - toc:
+      permalink: true

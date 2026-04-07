@@ -11,6 +11,9 @@ dev-dependencies = [
     "pip-audit>=2.10.0",
     "bandit>=1.9.3",
     "hypothesis>=6.151.2",
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.6.0",
+    "mkdocstrings[python]>=0.29.0",
 ]
 
 [tool.bandit]

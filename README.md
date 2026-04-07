@@ -1,8 +1,17 @@
 <div align="center">
-    <img width="300" height="300" alt="antyr-logo" src="https://github.com/user-attachments/assets/91a3347d-4863-43d7-a2a2-d581e5ede72c" />
+    <img width="160" height="160" alt="antyr" src="https://mrprfrm.github.io/antyr/assets/antyr-logo.png" />
+    <h1>antyr</h1>
+    <p><strong>Pipeline-like web crawling</strong></p>
+    <p>A minimalistic web crawling toolkit for Python</p>
+    <p>
+        <a href="https://pypi.org/project/antyr"><img src="https://img.shields.io/pypi/v/antyr" alt="PyPI"></a>
+        <a href="https://pypi.org/project/antyr"><img src="https://img.shields.io/pypi/pyversions/antyr" alt="Python"></a>
+        <a href="https://github.com/mrprfrm/antyr/blob/master/LICENSE"><img src="https://img.shields.io/pypi/l/antyr" alt="License"></a>
+        <a href="https://mrprfrm.github.io/antyr"><img src="https://img.shields.io/badge/docs-mkdocs-blue" alt="Docs"></a>
+    </p>
 </div>
 
-# antyr
+---
 
 This project focuses on **core crawling primitives**: making HTTP requests, consuming responses as streams, and persisting streamed content with explicit, cancellation-safe lifetimes.
 

@@ -14,7 +14,10 @@ wheels/
 # Operating system files
 .DS_Store
 
-# Testing 
+# Docs
+site/
+
+# Testing
 .pytest_cache/
 .coverage
 .hypothesis/

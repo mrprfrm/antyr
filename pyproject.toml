@@ -27,7 +27,7 @@ profile = "black"
 
 [project]
 name = "antyr"
-version = "1.0.3"
+version = "1.0.5"
 description = "A compact web crawling toolkit"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -52,6 +52,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/mrprfrm/antyr"
+Documentation = "https://mrprfrm.github.io/antyr"
 Source = "https://github.com/mrprfrm/antyr"
 "Bug Tracker" = "https://github.com/mrprfrm/antyr/issues"
 

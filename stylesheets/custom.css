@@ -1,0 +1,72 @@
+:root {
+  --md-accent-fg-color: #e84057;
+  --md-accent-fg-color--transparent: #e8405720;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #1a1a1c;
+  --md-primary-fg-color--light: #222224;
+  --md-primary-fg-color--dark: #161618;
+  --md-primary-bg-color: #f0f0f0;
+  --md-primary-bg-color--light: #b0b0b0;
+  --md-default-bg-color: #1a1a1c;
+  --md-default-bg-color--light: #222224;
+  --md-default-fg-color: #f0f0f0;
+  --md-default-fg-color--light: #a0a0a4;
+  --md-code-bg-color: #262428;
+  --md-code-fg-color: #f0f0f0;
+  --md-typeset-a-color: #e84057;
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #ffffff;
+  --md-primary-fg-color--light: #f8f8f8;
+  --md-primary-fg-color--dark: #f3f2f3;
+  --md-primary-bg-color: #1c1b1d;
+  --md-primary-bg-color--light: #444;
+  --md-default-bg-color: #ffffff;
+  --md-default-fg-color: #1c1b1d;
+  --md-default-fg-color--light: #555;
+  --md-code-bg-color: #f3f2f3;
+  --md-typeset-a-color: #e84057;
+}
+
+/* Header blends with page, subtle border */
+.md-header {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+/* Header title and icons use body text color, not white */
+.md-header__title,
+.md-header-nav__button,
+.md-header__button {
+  color: var(--md-default-fg-color);
+}
+
+/* Code block styling */
+.md-typeset code {
+  font-size: 0.82em;
+}
+
+.md-typeset pre > code {
+  border-radius: 6px;
+}
+
+/* Navigation links match accent on hover/active */
+.md-nav__link:hover,
+.md-nav__link--active {
+  color: var(--md-accent-fg-color);
+}
+
+/* Syntax highlighting: keywords in rose (dark mode) */
+[data-md-color-scheme="slate"] .highlight .k,
+[data-md-color-scheme="slate"] .highlight .kn,
+[data-md-color-scheme="slate"] .highlight .kd {
+  color: #e84057;
+}
+
+/* Search bar blends with page in light mode */
+[data-md-color-scheme="default"] .md-search__input {
+  background-color: #f3f2f3;
+}

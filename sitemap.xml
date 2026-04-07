@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/crawlers/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/execution/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/files/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/func/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/results/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/streaming/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+    <url>
+         <loc>https://mrprfrm.github.io/antyr/api/zip/</loc>
+         <lastmod>2026-04-07</lastmod>
+    </url>
+</urlset>
